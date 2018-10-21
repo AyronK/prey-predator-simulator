@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreyPredatorSim.Brain", "PreyPredatorSim.Brain\PreyPredatorSim.Brain.csproj", "{3528C340-5182-4E4E-BF41-1B9DDC97430B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreyPredatorSim.Test", "PreyPredatorSim.Test\PreyPredatorSim.Test.csproj", "{E04571D7-7C1A-480C-813C-734E1B85349F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{3528C340-5182-4E4E-BF41-1B9DDC97430B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3528C340-5182-4E4E-BF41-1B9DDC97430B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3528C340-5182-4E4E-BF41-1B9DDC97430B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E04571D7-7C1A-480C-813C-734E1B85349F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E04571D7-7C1A-480C-813C-734E1B85349F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E04571D7-7C1A-480C-813C-734E1B85349F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E04571D7-7C1A-480C-813C-734E1B85349F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A39C8B67-35A1-4B4A-825C-AA28F0EB00D4}
 	EndGlobalSection
 EndGlobal
