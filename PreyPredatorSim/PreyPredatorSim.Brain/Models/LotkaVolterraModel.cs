@@ -73,7 +73,7 @@ namespace PreyPredatorSim.Brain.Models
         private ulong ComputePreyDensity(double deltaTime)
         {
             double populationChange = deltaTime * (PreyGrowthRatio - PredationRate * PredatorDensity);
-            double computedPopulation = PredatorDensity * (1 + populationChange);
+            double computedPopulation = PreyDensity * (1 + populationChange);
             computedPopulation = computedPopulation.Clamp(min: 0);
 
             return (ulong) Math.Floor(computedPopulation);
