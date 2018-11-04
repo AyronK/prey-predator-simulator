@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimulationConfig : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class SimulationConfig : MonoBehaviour
+{
+    public InputSlider PredationRate;
+    public InputSlider PreyGrowthRatio;
+    public InputSlider PredatorReproductionRate;
+    public InputSlider PredatorReproductionRateSlider;
 }
