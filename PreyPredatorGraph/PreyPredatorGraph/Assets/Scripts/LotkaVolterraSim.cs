@@ -14,19 +14,38 @@ public class LotkaVolterraSim : MonoBehaviour
 
     [SerializeField] private Image preyGraph;
     [SerializeField] private Image predGraph;
+    [SerializeField] private Text totalPopText;
+    [SerializeField] private Text preyPopText;
+    [SerializeField] private Text predPopText;
+    [SerializeField] private Slider speedSlider;
+
+    public void Reset()
+    {
+        model = new LotkaVolterraModel(initialPreyDensity, initialPredatorDensity)
+        {
+            PreyGrowthRatio = 10.0,
+            PredationRate = 0.00055,
+            PredatorMortalityRate = 5.0,
+            PredatorReproductionRate = 0.1
+        };
+
+        RefreshView();
+    }
+
+    private void RefreshView()
+    {
+        var pop = model.PredatorDensity + model.PreyDensity;
+        totalPopText.text = pop.ToString();
+        preyPopText.text = model.PreyDensity.ToString();
+        predPopText.text = model.PredatorDensity.ToString();
+        var pred = (model.PredatorDensity / (float) pop);
+        predGraph.fillAmount = pred;
+        preyGraph.fillAmount = 1 - pred;
+    }
 
     private void Awake()
     {
-        enabled = false;
-        model = new LotkaVolterraModel((ulong) initialPreyDensity, (ulong) initialPredatorDensity)
-        {
-            PreyGrowthRatio = 1.0,
-            PredationRate = 0.001,
-            PredatorMortalityRate = 0.5,
-            PredatorReproductionRate = 0.0001
-        };
-        Debug.Log($"Pred: {model.PredatorDensity}");
-        Debug.Log($"Prey: {model.PreyDensity}");
+        Reset();
     }
 
     // Use this for initialization
@@ -34,22 +53,13 @@ public class LotkaVolterraSim : MonoBehaviour
     {
     }
 
-    private float timeElapsed = 0.0f;
-
     // Update is called once per frame
     void Update()
     {
-        timeElapsed += Time.deltaTime;
-        //if (timeElapsed >= 1)
-        //{
-            model.Calculate(Time.deltaTime / 1);
-            Debug.Log($"Pred: {model.PredatorDensity}");
-            Debug.Log($"Prey: {model.PreyDensity}");
-            timeElapsed = 0;
-            var pop = model.PredatorDensity + model.PreyDensity;
-            var pred = (model.PredatorDensity / (float) pop);
-            predGraph.fillAmount = pred;
-            preyGraph.fillAmount = 1 - pred;
-        //}
+        if (!Input.GetKey(KeyCode.Space))
+            return;
+
+        model.Calculate(Time.deltaTime / (100 / speedSlider.value));
+        RefreshView();
     }
 }
