@@ -12,12 +12,12 @@ namespace PreyPredatorSim.Brain.Models
         /// <summary>
         /// Current density of prey in model.
         /// </summary>
-        public ulong PreyDensity { get; private set; }
+        public int PreyDensity { get; private set; }
 
         /// <summary>
         /// Current density of predators in model.
         /// </summary>
-        public ulong PredatorDensity { get; private set; }
+        public int PredatorDensity { get; private set; }
 
         /// <summary>
         /// Intrinsic rate of prey population increase.
@@ -39,7 +39,7 @@ namespace PreyPredatorSim.Brain.Models
         /// </summary>
         public double PredatorReproductionRate { get; set; }
 
-        public LotkaVolterraModel(ulong initialPreyDensity, ulong initialPredatorDensity)
+        public LotkaVolterraModel(int initialPreyDensity, int initialPredatorDensity)
         {
             PreyDensity = initialPreyDensity;
             PredatorDensity = initialPredatorDensity;
@@ -54,29 +54,29 @@ namespace PreyPredatorSim.Brain.Models
             if (deltaTime <= 0)
                 return;
 
-            ulong preyDensityInNextStep = ComputePreyDensity(deltaTime);
-            ulong predatorDensityInNextStep = ComputPredatorDensity(deltaTime);
+            int preyDensityInNextStep = ComputePreyDensity(deltaTime);
+            int predatorDensityInNextStep = ComputPredatorDensity(deltaTime);
 
             PreyDensity = preyDensityInNextStep;
             PredatorDensity = predatorDensityInNextStep;
         }
 
-        private ulong ComputPredatorDensity(double deltaTime)
+        private int ComputPredatorDensity(double deltaTime)
         {
             var populationChange = deltaTime * (PredatorReproductionRate * PredationRate * PreyDensity - PredatorMortalityRate);
             var computedPopulation = PredatorDensity * (1 + populationChange);
             computedPopulation = computedPopulation.Clamp(min: 0);
 
-            return (ulong) Math.Floor(computedPopulation);
+            return  (int)Math.Floor(computedPopulation);
         }
 
-        private ulong ComputePreyDensity(double deltaTime)
+        private int ComputePreyDensity(double deltaTime)
         {
             double populationChange = deltaTime * (PreyGrowthRatio - PredationRate * PredatorDensity);
             double computedPopulation = PreyDensity * (1 + populationChange);
             computedPopulation = computedPopulation.Clamp(min: 0);
 
-            return (ulong) Math.Floor(computedPopulation);
+            return(int) Math.Floor(computedPopulation);
         }
     }
 }
